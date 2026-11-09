@@ -35,7 +35,8 @@ def sent_detector():
     # Return a formatted string with the scores and dominant emotion
     answer = f"For the given statement, the system response is " \
     f"'anger': {anger_score}, 'disgust': {disgust_score}, 'fear': {fear_score}, " \
-    f"'joy': {joy_score} and 'sadness': {sadness_score}. The dominant emotion is {dominant_emotion}."
+    f"'joy': {joy_score} and 'sadness': {sadness_score}. " \
+    f"The dominant emotion is {dominant_emotion}."
     return answer
 
 @app.route("/")
@@ -48,3 +49,4 @@ def render_index_page():
 if __name__ == "__main__":
     #This function executes the flask app and deploys it on localhost:5000
     app.run(host="0.0.0.0", port=5000)
+    
