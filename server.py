@@ -28,6 +28,10 @@ def sent_detector():
     sadness_score = response['sadness']
     dominant_emotion = response['dominant_emotion']
 
+    # Check if the dominant_emotion is None, indicating an error or invalid input
+    if dominant_emotion is None:
+        return "Invalid text! Please try again!"
+
     # Return a formatted string with the scores and dominant emotion
     answer = f"For the given statement, the system response is " \
     f"'anger': {anger_score}, 'disgust': {disgust_score}, 'fear': {fear_score}, " \
