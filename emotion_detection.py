@@ -2,6 +2,8 @@
     for analyzing emotions in a given input text.
 '''
 
+# Import the json library to format the response
+import json
 # Import the requests library to handle HTTP requests
 import requests
 
@@ -22,5 +24,22 @@ def emotion_detector(text_to_analyze):
     # Send a POST request to the API with the text and headers
     response = requests.post(url, json = myobj, headers=header, timeout=5000)
 
-    # Return the response text
-    return response.text
+    # Parse the response from the API
+    formatted_response = json.loads(response.text)
+    anger_score = formatted_response['emotionPredictions'][0]['emotion']['anger']
+    disgust_score = formatted_response['emotionPredictions'][0]['emotion']['disgust']
+    fear_score = formatted_response['emotionPredictions'][0]['emotion']['fear']
+    joy_score = formatted_response['emotionPredictions'][0]['emotion']['joy']
+    sadness_score = formatted_response['emotionPredictions'][0]['emotion']['sadness']
+    dominant_emotion = max(formatted_response['emotionPredictions'][0]['emotion'], key=formatted_response['emotionPredictions'][0]['emotion'].get)
+
+    # Returning a dictionary containing emotion analysis results
+    result = {
+    'anger': anger_score,
+    'disgust': disgust_score,
+    'fear': fear_score,
+    'joy': joy_score,
+    'sadness': sadness_score,
+    'dominant_emotion': dominant_emotion
+    }
+    return result
